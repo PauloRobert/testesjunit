@@ -5,15 +5,16 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import static org.junit.Assert.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import junit.framework.Assert;
 
 //Ordenar os testes por ordem alfabética @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GoogleTest {
 
@@ -51,6 +52,10 @@ public class GoogleTest {
 			System.out.println("Após digitar dê um ENTER para pesquisar \n");
 			driver.findElement(By.name("btnK")).sendKeys(Keys.ENTER);
 			Thread.sleep(3000);
+
+			System.out.println("Comparando o que foi pesquisado com o que esta na caixa de texto \n");
+			assertEquals(true, driver.getPageSource().contains(TermoParaPesquisar) == true);
+
 		} catch (InterruptedException e) {
 			System.out.println("Não foi possivel localizar o elemento para pesquisar \n");
 		}
@@ -73,7 +78,6 @@ public class GoogleTest {
 
 	}
 
-	
 	// Concluindo o Test com a Anotação @After do Junit
 
 	@After
